@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spürnasen Ausbildung | Borkenkäfer-Früherkennung Österreich</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2D5A27;
+            --primary-light: #4A7C44;
+            --secondary: #D4A373;
+            --accent: #FAEDCD;
+            --dark: #1A1C19;
+            --light: #F8F9FA;
+            --white: #FFFFFF;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--dark); background-color: var(--white); overflow-x: hidden; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; font-weight: 700; }
+
+        /* Navigation */
+        nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 10px 8%; 
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            background: rgba(255, 255, 255, 0.98); 
+            backdrop-filter: blur(10px); 
+            z-index: 1000; 
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05); 
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+        .logo-img {
+            height: 65px; 
+            width: auto;
+            border-radius: 5px;
+            object-fit: contain;
+        }
+        .logo-text { 
+            font-size: 1.3rem; 
+            font-weight: 700; 
+            color: var(--primary); 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+        }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: var(--transition); }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero */
+        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=2000') center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; color: var(--white); padding: 0 20px; }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 20px; }
+
+        .btn { padding: 16px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: var(--transition); display: inline-block; cursor: pointer; border: none; }
+        .btn-primary { background-color: var(--primary); color: var(--white); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(45, 90, 39, 0.4); }
+
+        section { padding: 100px 8%; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .image-box img { width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+
+        .services { background-color: var(--light); }
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .service-card { background: var(--white); padding: 40px; border-radius: 20px; border: 1px solid rgba(0,0,0,0.05); }
+
+        .interactive-section { text-align: center; background: var(--accent); border-radius: 30px; margin: 0 8% 100px 8%; padding: 60px; }
+        #dog-display-container { margin-top: 30px; height: 0; overflow: hidden; transition: all 0.6s ease-in-out; opacity: 0; }
+        #dog-display-container.active { height: auto; min-height: 450px; opacity: 1; padding-bottom: 20px; }
+        
+        .dog-image { 
+            width: 100%; 
+            max-width: 600px; 
+            height: 450px; 
+            object-fit: cover; 
+            object-position: center 20%; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+        }
+
+        .contact-container { max-width: 800px; margin: 0 auto; background: var(--white); padding: 50px; border-radius: 20px; box-shadow: 0 10px 50px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 20px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 10px; }
+
+        footer { background: var(--dark); color: var(--white); padding: 60px 8% 20px 8%; text-align: center; }
+
+        .fade-in { opacity: 0; transform: translateY(20px); transition: 0.8s all ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) { 
+            .grid-2 { grid-template-columns: 1fr; } 
+            .nav-links { display: none; } 
+            .logo-text { font-size: 1rem; }
+            .logo-img { height: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#home" class="logo-container">
+            <img src="logo-gross.png" alt="Spürnasen Logo" class="logo-img">
+            <div class="logo-text">Spürnasen Ausbildung</div>
+        </a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#loesung">Lösung</a>
+            <a href="#vorteile">Vorteile</a>
+            <a href="#kontakt">Kontakt</a>
+        </div>
+        <a href="#kontakt" class="btn btn-primary" style="padding: 10px 20px;">Anfragen</a>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Schützen Sie Ihren Wald.</h1>
+            <p>Borkenkäfer-Früherkennung in Österreich durch die Spürnasen Ausbildung.</p>
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <a href="#loesung" class="btn btn-primary">Mehr erfahren</a>
+                <button class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid white;" onclick="toggleDog()">Einsatz sehen</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="interactive-section fade-in">
+        <h2>Unsere Experten auf vier Pfoten</h2>
+        <p>Ein von uns ausgebildeter Spürhund erkennt Befall lange vor dem menschlichen Auge.</p>
+        <button class="btn btn-primary" style="margin-top: 20px;" onclick="toggleDog()" id="toggleBtn">Spürhund im Einsatz zeigen</button>
+        
+        <div id="dog-display-container">
+            <img src="suesser-hund-6dc9c175-de60-44b3-a07e-9110fcee3bbf.jpg" alt="Spürhund im Einsatz" class="dog-image">
+        </div>
+    </div>
+
+    <section id="loesung">
+        <div class="grid-2">
+            <div class="image-box fade-in">
+                <img src="der_borkenkafer_im_heidhof-revier_heiko_ehing_und_der_presssprecher_der_niedersachsischen_landesforsten_knut_sierk_mit_dem_schaleisen_an_einem_gefallten_fichtenstamm._mit_dem_schaleisen_werden_die_befalen_stellen_.jpeg" alt="Borkenkäfer Kontrolle im Wald">
+            </div>
+            <div class="content-box fade-in">
+                <h2 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 20px;">Der unsichtbare Feind</h2>
+                <p>Wenn Nadeln braun werden, ist es meist zu spät. Die Absolventen der <strong>Spürnasen Ausbildung</strong> finden den Käfer bereits beim Einbohren unter der Rinde.</p>
+                <br>
+                <h3 style="color: var(--secondary);">Manuelle Kontrolle vs. Spürhund</h3>
+                <p>Während die Kontrolle mit dem Schaleisen erst bei gefällten Stämmen oder sichtbaren Fraßspuren erfolgt, erkennt der Hund die Pheromone stehender Bäume sofort.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="vorteile">
+        <div class="service-grid">
+            <div class="service-card fade-in">
+                <h3>Professionelle Ausbildung</h3>
+                <p>Zertifizierte Trainingsmethoden für Mensch und Hund im forstlichen Einsatz.</p>
+            </div>
+            <div class="service-card fade-in">
+                <h3>Höchste Treffsicherheit</h3>
+                <p>Unsere Spürnasen finden frischen Stehendbefall mit überragender Genauigkeit.</p>
+            </div>
+            <div class="service-card fade-in">
+                <h3>Nachhaltiger Schutz</h3>
+                <p>Früherkennung ist das effektivste Mittel für den Erhalt unserer österreichischen Wälder.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt">
+        <div class="contact-container fade-in">
+            <form id="contactForm" onsubmit="event.preventDefault(); alert('Vielen Dank! Wir melden uns bezüglich der Ausbildung bei Ihnen.');">
+                <div class="form-group">
+                    <label>Name / Forstbetrieb</label>
+                    <input type="text" placeholder="Ihr Name" required>
+                </div>
+                <div class="form-group">
+                    <label>E-Mail Adresse</label>
+                    <input type="email" placeholder="email@beispiel.at" required>
+                </div>
+                <div class="form-group">
+                    <label>Nachricht</label>
+                    <textarea rows="5" placeholder="Haben Sie Fragen zur Ausbildung oder zum Einsatz?"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Jetzt Kontakt aufnehmen</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Spürnasen Ausbildung | Fachzentrum für Borkenkäfer-Früherkennung</p>
+    </footer>
+
+    <script>
+        function toggleDog() {
+            const container = document.getElementById('dog-display-container');
+            const btn = document.getElementById('toggleBtn');
+            if (container.classList.contains('active')) {
+                container.classList.remove('active');
+                btn.textContent = 'Spürhund im Einsatz zeigen';
+            } else {
+                container.classList.add('active');
+                btn.textContent = 'Bild verbergen';
+                setTimeout(() => { container.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 200);
+            }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
